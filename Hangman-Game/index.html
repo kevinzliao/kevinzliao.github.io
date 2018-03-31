@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman Game</title>
+
+    <!-- add bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+    <!-- reset.css not used -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="jumbotron bg-warning text-dark">
+        <h1 class="text-center">
+          <strong>Hangman-Safari Animals</strong>
+        </h1>
+        <div>Wins:<span id="wins"></span></div>
+    </div>
+
+    <div id="guesses" class="card">
+            <h4 class="card-header bg-success text-dark">Guess the animal!</h4>
+            <div id="guessRemaining">
+              </div>
+            </div>
+          </div>
+
+    <div id="curRound bg-primary text-dark" class="card">
+        <h4 class="card-header bg-primary text-dark">Current Round:</h4>
+                <!-- store current round blank array -->
+              <div id="curArray"></div>
+        <h4>Letters used:</h4>  
+            <div id="usedLetters"></div>   
+        </div>
+    </div>
+
+    <img src="Assets/images/img0.png" id="hangman">
+
+
+    <script src="Assets/javascript/game.js"></script>
+</body>
+</html>
