@@ -1,0 +1,67 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CrystalsCollector</title>
+
+    <!-- add bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+    <!-- reset.css not used -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="jumbotron text-dark">
+        <h1 class="text-center">
+          <strong>CrystalsCollector!</strong>
+        </h1>
+        <div class= "text-center">
+            Wins: <span id="wins"></span>
+            Losses: <span id="losses"></span>
+        </div>
+    </div>
+
+    <div class="card">
+            <h4 class="card-header bg-success text-dark">
+                You will be given a random number at the start of the game.
+
+                There are four crystals below. By clicking on a crystal you will
+                add a specific amount of points to your total score.
+
+                You win the game by matching your total score to a random number,
+                and you will lose if your total score goes above the random number.
+
+                The value of each crystal is hidden from you until you click on it.
+
+                Each time when the game starts, the game will change the values of each crystal.
+
+                Good luck!
+            </h4>
+              </div>
+            </div>
+          </div>
+
+    <div id="curRound bg-primary text-dark" class="card">
+        <h4 class="card-header bg-primary text-dark">Target number: <span id="target"></span></h4>
+                <!-- store current round blank array -->
+        <h4>Your total score is: <span id="totalScore"></span></h4>  
+        </div>
+    </div>
+
+    <div id="crystals">
+        <img src="Assets/images/crystal1.jpg" id="crystal1">
+        <img src="Assets/images/crystal2.jpg" id="crystal2">
+        <img src="Assets/images/crystal3.jpg" id="crystal3">
+        <img src="Assets/images/crystal4.jpg" id="crystal4">
+    </div>
+
+
+    <script src="Assets/javascript/game.js"></script>
+</body>
+</html>
