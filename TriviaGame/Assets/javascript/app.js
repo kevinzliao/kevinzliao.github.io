@@ -43,7 +43,7 @@ $(document).ready(function() {
         
 
         if (time == 0) {
-            alert("Times up!");
+            alert("Time's up!");
             endGame();
         }
 
