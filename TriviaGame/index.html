@@ -1,0 +1,111 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CrystalsCollector</title>
+
+    <!-- add bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+    <!-- reset.css not used -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="jumbotron text-dark">
+        <h1 class="text-center">
+          <strong>Timed Trivia</strong>
+        </h1>
+        <div class= "text-center">
+            Time Remaining: <span id="time">5</span> Seconds
+        </div>
+    </div>
+
+    <div id="questions">
+        <div class="container">
+            <h2>Who played for the Lakers?</h2>
+            <form class="question">
+            <label class="radio-inline">
+                <input type="radio" name="q1" value="correct">Kobe
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="q1" value="wrong">Jordan
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="q1" value="wrong">Lebron
+            </label>
+            </form>
+        </div>
+
+        
+        <div class="container">
+            <h2>How many championships have the Timberwolves won?</h2>
+            <form class="question">
+            <label class="radio-inline">
+                <input type="radio" name="q2" value="correct">0
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="q2" value="wrong">1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="q2" value="wrong">2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="q2" value="wrong">3
+            </label>
+            </form>
+        </div>
+
+        <div class="container">
+                <h2>Which team does Kevin Durant currently play for?</h2>
+                <form class="question">
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="wrong">Heat
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="correct">Warriors
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="wrong">Bulls
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="wrong">Thunder
+                </label>
+                </form>
+        </div>
+
+        <div class="container">
+                <h2>Which team does James Harden currently play for?</h2>
+                <form class="question">
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="wrong">Pelicans
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="wrong">Clippers
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="wrong">Celtics
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q3" value="correct">Rockets
+                </label>
+                </form>
+        </div>
+
+        
+
+        <button class="text-center button">Done</button>
+
+      </div>
+
+      
+    
+    <script src="Assets/javascript/app.js"></script>
+</body>
+</html>
