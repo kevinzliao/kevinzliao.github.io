@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Giphy</title>
+</head>
+
+
+
+<body>
+
+    <form>
+        <span id="topics">Add a topic:
+            <input id="topicIn" type="text">
+            <input id="add-topic" value="Add Topic" type="submit">
+        </span>
+    </form>
+
+    <div id="items"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // Example queryURL for Giphy API
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+            person + "&api_key=zHXQ61WJNhzuNGzW8ufVFuVdokPAIDob&limit=5";
+        var topics = ['animals'];
+
+        $("#add-topic").on("click", function (event) {
+            // prevent form from submitting
+            event.preventDefault();
+            for (i = 0; i < topics.length; i++) {
+                var a = $("<button>");
+                a.text(topics[i]);
+                $('#items').append(a);
+            }
+
+        });
+
+
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+            });
+    </script>
+
+</body>
+
+</html>
