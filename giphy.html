@@ -10,42 +10,94 @@
 
 <body>
 
+    <!--This div contains the buttons for the images-->
+    <div id="items"></div>
+
     <form>
-        <span id="topics">Add a topic:
-            <input id="topicIn" type="text">
-            <input id="add-topic" value="Add Topic" type="submit">
+        <span id="topic-item">Topic to choose:
+            <input id="topic" type="text">
+            <input id="add-topic" value="Add Item" type="submit">
         </span>
     </form>
 
-    <div id="items"></div>
-
+    <!-- This div contains the images and related ratings-->
+    <div id="images"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         // Example queryURL for Giphy API
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            person + "&api_key=zHXQ61WJNhzuNGzW8ufVFuVdokPAIDob&limit=5";
-        var topics = ['animals'];
 
-        $("#add-topic").on("click", function (event) {
-            // prevent form from submitting
-            event.preventDefault();
+        $(document).ready(function () {
+            var queryURL = ""
+            var topics = ['cow', 'pig', 'sheep', 'chicken', 'duck'];
+            //initializing imageArray since we will need it to make images still and animated
+            var imageArray = [];
+
             for (i = 0; i < topics.length; i++) {
                 var a = $("<button>");
                 a.text(topics[i]);
+                a.attr("class", "btn");
                 $('#items').append(a);
             }
 
+
+
+            $("#add-topic").on("click", function (event) {
+                // prevent form from submitting
+                event.preventDefault();
+                var a = $("<button>");
+                a.attr("class", "btn");
+                a.text($("#topic").val());
+                $('#items').append(a);
+            });
+
+            $("#items").on("click", ".btn", function () {
+
+                //clear out the images div since we are appending the images
+                $("#images").empty();
+                //get clicked button's text value and feed it into the query URL
+                queryURL = "https://api.giphy.com/v1/gifs/search?q=" + $(this).text()
+                    + "&api_key=zHXQ61WJNhzuNGzW8ufVFuVdokPAIDob&limit=10";
+
+                //ajax call with url from above
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response.data);
+
+                    //store response as array of data
+                    imageArray = response.data;
+
+                    for (i = 0; i < imageArray.length; i++) {
+                        var gifDiv = $("<div class='image'>");
+                        var rating = imageArray[i].rating;
+                        var p = $("<p>").text("Rating: " + rating);
+                        var image = $("<img class='still'>");
+                        image.attr("id", i);
+                        image.attr("src", imageArray[i].images.fixed_height_still.url);
+                        
+                        $("#images").append(p);
+                        $("#images").append(image);
+                    }
+                });
+
+                //if image is still change the url to animated so it plays
+                $("#images").on('click', 'img.still', function () {
+                    $(this).attr('src', imageArray[$(this).attr("id")].images.fixed_height.url);
+                    $(this).attr('class', 'animated');
+                });
+                //if image is animated change back to still
+                $("#images").on('click', 'img.animated', function () {
+                    $(this).attr('src', imageArray[$(this).attr("id")].images.fixed_height_still.url);
+                    $(this).attr('class', 'still');
+                });
+
+            });
+
         });
 
-
-
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response);
-            });
     </script>
 
 </body>
