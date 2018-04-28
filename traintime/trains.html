@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Train Time</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Jumbotron -->
+    <div class="jumbotron bg-primary">
+      <h1 class="text-center">Anytime is Train Time</h1>
+      <h3 class="text-center">Choo Choo. Chee Chee.</h3>
+    </div>
+
+    <div class=card>
+      <table class="table">
+        <div class="card-heading">
+          <h3 class="card-title">Current Train Schedule</h3>
+        </div>
+        <thead>
+          <tr>
+            <th scope="col">Train Name</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Frequency (min)</th>
+            <th scope="col">Next Arrival</th>
+            <th scope="col">Minutes Away</th>
+          </tr>
+        </thead>
+        <tbody id="memberTable">
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+
+      <!-- Sign-Up Card-->
+      <div class="col-lg-12 mt-4">
+        <div class="card card-default">
+          <div class="card-heading">
+            <h3 class="card-title">Add Train</h3>
+          </div>
+
+          <div class="card-body">
+
+            <!-- Sign-up Form (note the various input "types")-->
+            <form role="form">
+              <div class="form-group row">
+                <label for="name-input">Train Name:</label>
+                <input class="form-control" id="name-input" type="text">
+              </div>
+              <div class="form-group row">
+                <label for="dest-input">Destination</label>
+                <input class="form-control" id="dest-input" type="text">
+              </div>
+              <div class="form-group row">
+                <label for="time-input">First Train Time:</label>
+                <input class="form-control" id="time-input" type="time">
+              </div>
+              <div class="form-group row">
+                <label for="freq-input">Frequency (min)</label>
+                <input class="form-control" id="freq-input" type="number">
+              </div>
+              <button class="btn btn-default" id="add-train" type="submit">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- Script -->
+  <script>
+
+    // ========================================== START CODING BELOW!!
+
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCxkeC6QfEXXdGVFGvynbfpByhwFt_ZwlQ",
+      authDomain: "times-a10a6.firebaseapp.com",
+      databaseURL: "https://times-a10a6.firebaseio.com",
+      projectId: "times-a10a6",
+      storageBucket: "",
+      messagingSenderId: "1099246051538"
+    };
+
+    firebase.initializeApp(config);
+
+    var dataRef = firebase.database();
+
+    // Initial Values
+    var name = "";
+    var destination = "";
+    var frequency = 0;
+    var firstTime;
+
+    // Capture Button Click
+    $("#add-train").on("click", function (event) {
+      event.preventDefault();
+
+      // YOUR TASK!!!
+      // Code in the logic for storing and retrieving the most recent user.
+      // Don't forget to provide initial data to your Firebase database.
+      name = $("#name-input").val().trim();
+      destination = $("#dest-input").val().trim();
+      frequency = $("#freq-input").val().trim();
+      firstTime = $("#time-input").val().trim();
+
+      // Code for the push
+      dataRef.ref().push({
+
+        name: name,
+        destination: destination,
+        time: firstTime,
+        frequency: frequency,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+      });
+    });
+
+    // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
+    dataRef.ref().on("child_added", function (childSnapshot) {
+
+
+      var today = moment();
+      var startMoment = moment(childSnapshot.val().time, "HHmm");
+      var freq = childSnapshot.val().frequency;
+
+      //get total time between initial train and current time
+      var totalDiff = today.diff(startMoment, 'minutes');
+
+      //modulo will get us the difference between the current time and the next train, add one to offset
+      var minuteDiff = Math.abs(totalDiff % freq) + 1;
+
+      var nextArrival = today.add(minuteDiff, 'minutes');
+
+      var a = $("<tr>")
+      a.append("<td>" + childSnapshot.val().name + "</td>");
+      a.append("<td>" + childSnapshot.val().destination + "</td>");
+      a.append("<td>" + freq + "</td>");
+      a.append("<td>" + nextArrival.format('hh:mm A') + "</td>");
+      a.append("<td>" + minuteDiff + "</td>");
+      $("#memberTable").append(a);
+
+      // Handle the errors
+    }, function (errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
+
+  </script>
+</body>
+
+</html>
