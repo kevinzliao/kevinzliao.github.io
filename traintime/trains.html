@@ -145,11 +145,18 @@
 
       //get total time between initial train and current time
       var totalDiff = today.diff(startMoment, 'minutes');
+      console.log(totalDiff);
 
       //modulo will get us the difference between the current time and the next train, add one to offset
-      var minuteDiff = Math.abs(totalDiff % freq) + 1;
+      var minuteDiff = Math.abs(freq - totalDiff % freq);
 
       var nextArrival = today.add(minuteDiff, 'minutes');
+
+      //if current time is before the first train, next train is at first time, modify difference accordingly
+      if (totalDiff < 0) {
+        nextArrival = startMoment;
+        minuteDiff = Math.abs(totalDiff);
+      }
 
       var a = $("<tr>")
       a.append("<td>" + childSnapshot.val().name + "</td>");
